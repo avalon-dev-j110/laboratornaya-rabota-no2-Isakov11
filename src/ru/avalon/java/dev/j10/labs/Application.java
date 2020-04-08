@@ -23,31 +23,27 @@ public class Application {
             new Rectangle(new FloatPoint(0f, 0f), new FloatPoint(5f, 5f),0),
             new Rectangle(new FloatPoint(0f, 0f), new FloatPoint(4f, 4f),0),
             new Rectangle(new FloatPoint(0f, 0f), new FloatPoint(3f, 3f),0)
-        };
+        };         
          /*
          *2. Найти в массиве 'shapes' фигуру с максимальной
          *    площадью. Для поиска фигуры необходимо создать
          *    статический метод в текущем классе (Main).
          */
-         Shape maxShape = MaxArea(shapes);
+         Shape maxShape = maxArea(shapes);
          System.out.println(maxShape + ", "+ maxShape.getArea());         
     }
     
-    static Shape MaxArea(Shape Shapes[]){        
-        if (Shapes.length == 0){
-            return null;
+    static Shape maxArea(Shape Shapes[]){
+        if (Shapes == null || Shapes.length == 0){
+            throw new IllegalArgumentException("Shapes array is empty or null");            
         }
-        Shape tempShape;
-        try{
-            tempShape = Shapes[0];        
-            for(int i=1;i<Shapes.length;i++){        
-                if (Shapes[i].getArea() > tempShape.getArea()){                
-                    tempShape = Shapes[i];
-                }        
+        Shape tempShape = new Circle(new FloatPoint(0f, 0f), 0f);
+        for (Shape shape : Shapes) {
+            if (shape != null) {
+                if (shape.getArea() >= tempShape.getArea()) {
+                    tempShape = shape;
+                }
             }
-        }
-        catch (NullPointerException e){
-            return null;
         }
         return tempShape;
     };
